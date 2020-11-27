@@ -1,0 +1,21 @@
+-------------------------------------------------------------------------------------Unable to determine hidden service hostname
+Badly formatted reply line: beginning is malformed-------------------------------------------------------------------------------------Unable to determine hidden service hostname
+Badly formatted reply line: beginning is malformed-------------------------------------------------------------------------------------Error setting up the tor controller.
+Error setting up connection to Tor-------------------------------------------------------------------------------------Error setting up the tor controller.
+Error setting up connection to Tor-------------------------------------------------------------------------------------Error setting up the tor controller.
+Error setting up connection to Tor-------------------------------------------------------------------------------------Error setting up the tor controller.
+Error setting up connection to Tor-------------------------------------------------------------------------------------Error setting up the tor controller.
+Error setting up connection to Tor-------------------------------------------------------------------------------------Error setting up the tor controller.
+Error setting up connection to Tor-------------------------------------------------------------------------------------Error setting up the tor controller.
+Error setting up connection to Tor-------------------------------------------------------------------------------------Error setting up the tor controller.
+Error setting up connection to Tor-------------------------------------------------------------------------------------Error setting up the tor controller.
+Error setting up connection to Tor-------------------------------------------------------------------------------------Error setting up the tor controller.
+Error setting up connection to Tor-------------------------------------------------------------------------------------Error setting up the tor controller.
+Error setting up connection to Tor-------------------------------------------------------------------------------------Error setting up the tor controller.
+Error setting up connection to Tor-------------------------------------------------------------------------------------Error setting up the tor controller.
+Error setting up connection to Tor-------------------------------------------------------------------------------------Error setting up the tor controller.
+Error setting up connection to Tor-------------------------------------------------------------------------------------Error setting up the tor controller.
+Error setting up connection to Tor-------------------------------------------------------------------------------------Error setting up the tor controller.
+Error setting up connection to Tor-------------------------------------------------------------------------------------Error setting up the tor controller.
+Error setting up connection to Tor-------------------------------------------------------------------------------------Error setting up the tor controller.
+Error setting up connection to Tor

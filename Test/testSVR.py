@@ -19,8 +19,15 @@ class MyTestCase(unittest.TestCase):
     def testConstructor(self):
         inst = SVR()
         self.assertIsNotNone(inst.log)
+        self.assertIsNotNone(inst.route)
         self.assertEqual(len(inst.blackList), 0)
         self.assertEqual(len(inst.connections), 0)
+
+    def testInitiate(self):
+        inst = SVR()
+
+        connection = inst.initiate()
+        self.assertIsNotNone(connection)
 
 if __name__ == '__main__':
     unittest.main()

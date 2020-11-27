@@ -1,7 +1,7 @@
-import ssl
 from utils.Log import Log
-from datetime import datetime
+from Src.Route import Route
 from socket import socket, AF_INET, SOCK_STREAM, SOL_SOCKET, SO_REUSEADDR, SHUT_RDWR
+from ssl import create_default_context, Purpose,  CERT_REQUIRED
 
 '''
     Class responsible for setting up and maintaining a socket 
@@ -17,6 +17,7 @@ class SVR:
         self.log = Log()
         self.blackList = []
         self.connections = {}
+        self.route = Route()
 
     '''
         Tears down the socket object that a remote host is 
@@ -32,7 +33,7 @@ class SVR:
             del sock # 0 references to sock, object deleted?
             flag = True
         except Exception as e:
-            self.log.addToErrorLog("{}\n".format(str(e)))
+            self.log.addToErrorLog("Error destroying socket object\n{}".format(str(e)))
         return flag
 
     '''
@@ -40,22 +41,29 @@ class SVR:
         Also implements IP Filtering / Logging.
     '''
     def initiate(self):
-        context = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
-        context.load_verify_locations('path/to/cabundle.pem')
+        # Make sure tor controller has been created
+        controller = self.route.createController()
+
+        # Start hidden service
+        self.route.setUpService(controller)
+
+        # Set up SSL configuration
+        context = create_default_context(Purpose.CLIENT_AUTH)
+        context.verify_mode = CERT_REQUIRED
+        context.check_hostname = True
+        context.load_cert_chain(certfile = '../artifacts/C2.pem', keyfile = '../artifacts/C2.key')
 
         with socket(AF_INET, SOCK_STREAM) as s:
             s.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
-            s.bind(('', 8080))
+            s.bind(('', self.route.t_port))
             s.listen(1)
-            with context.wrap_socket(s, server_side = True) as ssock:
+            with context.wrap_socket(s, server_side = True, do_handshake_on_connect=True) as ssock:
                 conn, addr = ssock.accept()
 
         # conn, addr if connection is legal
         connection = ('', '')
 
-        # Log connection event dd/mm/YY H:M:S
-        dt_string = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-        self.log.addToLog('{} initiated a connection at: {}\n'.format(addr[0], dt_string))
+        self.log.addToLog('{} initiated a connection at: {}\n'.format(addr[0], self.log.getTimeStamp()))
 
         # IP is blacklisted
         if addr[0] in self.blackList:
@@ -73,15 +81,7 @@ class SVR:
 
         # IP Added to blacklist
         elif addr[0] in self.connections and self.connections.get(addr[0]) == 3:
-            self.log.addtoBlackList("{} added to blacklist at {}n".format(addr[0]), dt_string)
+            self.log.addtoBlackList("{} added to blacklist at {}n".format(addr[0]), self.log.getTimeStamp())
             self.tearDown(s)
 
         return connection
-
-
-
-
-
-
-
-

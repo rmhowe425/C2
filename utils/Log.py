@@ -1,3 +1,5 @@
+from datetime import datetime
+
 '''
     Class responsible for logging various actions, events, and errors that
     occur throughout program execution.
@@ -11,6 +13,13 @@ class Log:
         self.log = 'log.txt'
         self.error = 'errorLog.txt'
         self.blackList = 'blacklist.txt'
+
+    '''
+        Create time stamp for error messages.
+        Time stamp is in the format: dd/mm/YY H:M:S
+    '''
+    def getTimeStamp(self):
+        return datetime.now().strftime("%d/%m/%Y %H:%M:%S")
 
     '''
         Class responsible for logging normal events such as 
