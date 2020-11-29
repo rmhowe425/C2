@@ -42,7 +42,7 @@ class Route:
 
         try:
             # Each service must have an associated folder, result is hidden service hostname
-            result = controller.create_ephemeral_hidden_service(self.hPORT, key_type = 'NEW', key_content = 'RSA1024'
+            result = controller.create_ephemeral_hidden_service(self.h_PORT, key_type = 'NEW', key_content = 'RSA1024'
                 ,discard_key = False, detached = False, await_publication = False, timeout = None, basic_auth = None, max_streams = None)
         except Exception as e:
             error = str(e)

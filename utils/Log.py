@@ -19,7 +19,7 @@ class Log:
         Time stamp is in the format: dd/mm/YY H:M:S
     '''
     def getTimeStamp(self):
-        return datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+        return datetime.now().strftime("%m/%d/%Y %H:%M:%S")
 
     '''
         Class responsible for logging normal events such as 
@@ -31,7 +31,7 @@ class Log:
         status = False
         try:
             with open(self.log, "a+") as file:
-                file.write("-" * 85 + entry)
+                file.write(self.getTimeStamp() + '\n' + "-" * 85 + '\n' + entry + '\n\n')
                 status = True
         except Exception as e:
             self.addToErrorLog(str(e))
@@ -45,7 +45,7 @@ class Log:
     def addToErrorLog(self, error):
         flag = False
         with open(self.error, "a+") as file:
-            file.write("-" * 85 + error)
+            file.write(self.getTimeStamp() + '\n' + "-" * 85 + '\n' + error + '\n\n')
             flag = True
         return flag
 
@@ -59,7 +59,7 @@ class Log:
         status = False
         try:
             with open(self.blackList, "a+") as file:
-                file.write("-" * 85 + entry)
+                file.write(self.getTimeStamp() + '\n' + "-" * 85 + '\n' + entry + '\n\n')
                 status = True
         except Exception as e:
             self.addToErrorLog(str(e))

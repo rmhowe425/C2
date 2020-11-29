@@ -9,10 +9,6 @@ from socket import socket, AF_INET, SOCK_STREAM
 '''
 class MyTestCase(unittest.TestCase):
 
-    def helper(self, inst, sock):
-        sleep(2)
-        self.assertEqual(inst.tearDown(sock), True)
-
     '''
         Tests for correct functionality of the SVR() constructor
     '''
