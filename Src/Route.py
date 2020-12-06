@@ -13,8 +13,7 @@ class Route:
     def __init__(self):
         self.log = Log()
         self.c_PORT = 9051
-        self.r_PORT = 80
-        self.h_PORT = 8081
+        self.r_PORT = 8081
 
     '''
         Creates a new tor controller on port 8080
@@ -24,7 +23,8 @@ class Route:
         controller = ''
         # Establish port for service
         try:
-            controller = Controller.from_port(address = "127.0.0.1", port = self.c_PORT)
+            controller = Controller.from_port(port = self.c_PORT)
+
         except Exception as e:
             error = "Error setting up connection to Tor"
             self.log.addToErrorLog("Error setting up the tor controller.\n{}".format(str(error)))
@@ -42,14 +42,13 @@ class Route:
 
         try:
             # Each service must have an associated folder, result is hidden service hostname
-            result = controller.create_ephemeral_hidden_service(self.h_PORT, key_type = 'NEW', key_content = 'RSA1024'
-                ,discard_key = False, detached = False, await_publication = False, timeout = None, basic_auth = None, max_streams = None)
+            result = controller.create_ephemeral_hidden_service({80: self.r_PORT})
         except Exception as e:
             error = str(e)
             self.log.addToErrorLog('Unable to determine hidden service hostname\n{}'.format(error))
             exit(1)
 
-        return result.hostname
+        return result.service_id + '.onion'
 
 
 
