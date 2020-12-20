@@ -3,8 +3,8 @@
 **Python-Based Command & Control server.**
 
 * Uses the Stem library to send all communications through Tor.
-* Uses SSL for two-way authentication and Diffie - Hellman to properly set up hybrid encryption.
-* Uses an AES Cipher Block Chaining cipher for symmetric encryption with a 128-bit key that is generated from an MD5 hash.
+* Uses diffie-hellman key exchange to set up symmetic encryption.
+* Uses AES Cipher Block Chaining mode for symmetric encryption with a 128-bit key that is generated from an MD5 hash.
  
 
 **Required Libraries**
