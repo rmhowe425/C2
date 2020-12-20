@@ -11,9 +11,10 @@ class SVR:
 
     '''
         Constructor for the SVR class.
+        @param PORT: Port that the server is to run on
     '''
-    def __init__(self):
-        self.PORT = 8081
+    def __init__(self, PORT):
+        self.PORT = PORT
         self.log = Log()
         self.blackList = []
         self.connections = {}
@@ -38,7 +39,7 @@ class SVR:
         return flag
 
     '''
-        Creates an instance of a socket server that uses SSL / TLS.
+        Creates an instance of a socket server.
         Also implements IP Filtering / Logging.
     '''
     def initiate(self):
