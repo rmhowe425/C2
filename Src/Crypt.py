@@ -1,5 +1,6 @@
 from Crypto.Hash import MD5
 from Crypto.Cipher import AES
+from Crypto.Random import random
 from Crypto.Util.Padding import unpad, pad
 
 '''
@@ -19,6 +20,26 @@ class Crypt:
         self.encryptCipher = self.generateCipher(self.hashKey)
         self.decryptCipher = self.generateCipher(self.hashKey)
         self.masterCipher = self.generateCipher(self.masterKey)
+
+    '''
+        [*] POC method - needs further testing for app. sec.
+        Handles the diffie hellman key exchange.
+        @param sock: Socket instance used to exchange key components with a remote host.
+        @return: Key derived from diffie hellman key exchange.
+    '''
+    def diffieHellman(self, sock):
+        p = 0x00cc81ea8157352a9e9a318aac4e33ffba80fc8da3373fb44895109e4c3ff6cedcc55c02228fccbd551a504feb4346d2aef47053311ceaba95f6c540b967b9409e9f0502e598cfc71327c5a455e2e807bede1e0b7d23fbea054b951ca964eaecae7ba842ba1fc6818c453bf19eb9c5c86e723e69a210d4b72561cab97b3fb3060b
+        g = 2
+        a = random.randrange(1, p - 1)
+
+        # Receive remote secret
+        remote_secret = int(sock.recv(1024).decode())
+
+        # Send secret
+        sock.send(str(pow(g, a, p)).encode())
+
+        return (str(pow(remote_secret, a, p)))
+
 
     '''
         @param key: Key used to generate an MD5 digest.
