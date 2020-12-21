@@ -50,6 +50,14 @@ class Route:
 
         return result.service_id + '.onion'
 
+    '''
+        Creates a new hidden service for a repeater on a specified port
+        @param controller: Controller object that will be hosting the service 
+        @return: Hostname (onion link) of the new service.
+    '''
+    def setUpHiddenSvr(self, controller):
+        return True
+
 
 
 
