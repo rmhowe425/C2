@@ -56,7 +56,7 @@ class Route:
         @return: Hostname (onion link) of the new service.
     '''
     def setUpHiddenSvr(self, controller):
-        return True
+        return False
 
 
 
