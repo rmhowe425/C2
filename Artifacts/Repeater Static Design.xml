@@ -1,0 +1,53 @@
+<diagram program="umletino" version="14.3.0"><zoom_level>10</zoom_level><element><id>UMLPackage</id><coordinates><x>10</x><y>10</y><w>790</w><h>560</h></coordinates><panel_attributes>Src
+--
+bg=blue</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>510</x><y>50</y><w>250</w><h>190</h></coordinates><panel_attributes>&lt;&lt;Python Class&gt;&gt;
+Svr
+--
++ PORT: int
++ blackList: List&lt;String&gt;
++ connections: dictionary&lt;Socket&gt;
+--
++ __init__(self, int: PORT):
++ teardown(self): Boolean
++ initiate(self): Socket
++ Repeater(self): socket</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>410</x><y>370</y><w>370</w><h>170</h></coordinates><panel_attributes>&lt;&lt;Python Class&gt;&gt;
+Route
+--
++ c_PORT: int
++ r_PORT: int
+--
++ __init__(self):
++ createController(self): void
++ setUpHiddenSVC(self, Controller): HiddenService
++ setUpEphemeralSVC(self, Controller): EphemeralHiddenService
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>30</x><y>50</y><w>370</w><h>240</h></coordinates><panel_attributes>&lt;&lt;Python Class&gt;&gt;
+Crypt
+--
++ hashKey: MD5
++ masterKey: MD5
++ encryptCipher: AES
++ decryptCipher: AES
++ masterCipher: AES
+--
++ __init__(self):
++ diffieHellman(self, Socket: sock): bytestring
++ generateHash(self, bytestring: key): MD5
++ generateCipher(self, MD5: input): AES
++ encryptData(self, String: pt): bytestring
++ decryptData(self, byteString: ct): String
++ masterEncrypt(self, String:pt): bytestring</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>840</x><y>10</y><w>400</w><h>200</h></coordinates><panel_attributes>Utils
+--
+bg=orange</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>860</x><y>50</y><w>370</w><h>130</h></coordinates><panel_attributes>&lt;&lt;Python Class&gt;&gt;
+Log
+--
++ __init__(self):
++ getTimeStamp(self): datetime
++ addToLog(self, String:entry): Boolean
++ addToErrorLog(self, String:error): Boolean
++ addToBlackList(self, String:entry): Boolean</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>620</x><y>170</y><w>270</w><h>220</h></coordinates><panel_attributes>lt=&lt;-
+log</panel_attributes><additional_attributes>250;10;10;200</additional_attributes></element><element><id>Relation</id><coordinates><x>750</x><y>50</y><w>130</w><h>100</h></coordinates><panel_attributes>lt=&lt;-
+log</panel_attributes><additional_attributes>110;10;10;80</additional_attributes></element><element><id>Relation</id><coordinates><x>600</x><y>230</y><w>60</w><h>160</h></coordinates><panel_attributes>lt=&lt;-
+route</panel_attributes><additional_attributes>10;140;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>900</x><y>340</y><w>250</w><h>60</h></coordinates><panel_attributes>&lt;&lt;Python Script&gt;&gt;
+--
+Main()
+</panel_attributes><additional_attributes></additional_attributes></element></diagram>

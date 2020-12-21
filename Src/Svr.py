@@ -49,7 +49,6 @@ class SVR:
         with self.route.createController() as controller:
             controller.authenticate(password = 'Richard')
             hostname = self.route.setUpService(controller)
-            print(hostname)
 
             if hostname:
                 try:
@@ -58,10 +57,8 @@ class SVR:
                         s.bind(('', self.PORT))
                         s.listen(1)
                         connection = s.accept()
-                        print(connection[1])
                 except Exception as e:
                     error = str(e)
-                    print(error)
                     self.log.addToErrorLog("Unable to establish a socket connection.\n{}".format(error))
                     exit(1)
 
@@ -89,3 +86,15 @@ class SVR:
                     self.log.addToLog("IP {} added to the blacklist.".format(connection[1][0]))
 
         return connection
+
+    '''
+        Forwards received data to a specified .onion link 
+        for a remote C2.
+        @param URL: .onion link .
+    '''
+    def Repeater(self, URL):
+        return 1
+
+
+
+
