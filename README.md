@@ -1,4 +1,4 @@
-## C2
+# C2
 
 **Python-Based Command & Control server.**
 
@@ -6,7 +6,7 @@
 * Uses diffie-hellman key exchange to set up symmetic encryption.
 * Uses AES Cipher Block Chaining mode for symmetric encryption with a 128-bit key that is generated from an MD5 hash.
 
-# Modes of Operation
+## Modes of Operation
 * Single Server
 * Repeater (Statelessly forwards data from one server to another)
 
